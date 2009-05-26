@@ -29,15 +29,15 @@ END`
 
   if contents.split("\n")[-2] =~ /Dropzone: (.*)/
     destination = $1
-    $dz.determinate("1")
+    $dz.determinate(true)
     $dz.begin("Copying files...")
 
     Rsync.do_copy($dz, $items, destination, false)
 
     $dz.finish("Copy Complete")
-    $dz.url("0")
+    $dz.url(false)
   else
     $dz.finish("Error")
-    $dz.url("0")
+    $dz.url(false)
   end
 end

@@ -9,7 +9,7 @@
 # IconURL: http://www.entropytheblog.com/dropzone/pastie-is.gd.png
 
 def dragged
-  $dz.determinate("0")
+  $dz.determinate(false)
   $dz.begin("Performing Paste...")
 
   pastie = Pastie::API.new

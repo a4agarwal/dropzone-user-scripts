@@ -9,7 +9,7 @@
 # IconURL: http://aptonic.com/destinations/icons/is.gd.png
 
 def dragged
-  $dz.determinate("0")
+  $dz.determinate(false)
   $dz.begin("Getting is.gd URL")
 
   if $items[0] =~ /http/
@@ -18,7 +18,7 @@ def dragged
     $dz.url(url)
   else
     $dz.finish("Invalid URL")
-    $dz.url(0)
+    $dz.url(false)
   end
 end
 
