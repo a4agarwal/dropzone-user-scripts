@@ -1,0 +1,43 @@
+#!/usr/bin/ruby
+
+# Dropzone Destination Info
+# Name: Copy to Terminal path
+# Description: Dropped files will be copied to the current Terminal.app path.
+# Handles: NSFilenamesPboardType
+# Creator: Aptonic Software
+# URL: http://aptonic.com
+# IconURL: http://aptonic.com/destinations/icons/terminal.png
+
+def dragged
+  
+`osascript <<END 
+tell application "Terminal"
+	activate
+	do script "echo Dropzone: \\$PWD" in selected tab of front window
+end tell
+END`
+
+  sleep(1)
+
+contents=`osascript <<END
+  tell application "Terminal"
+    tell front window
+      contents of selected tab as text
+    end
+  end
+END`
+
+  if contents.split("\n")[-2] =~ /Dropzone: (.*)/
+    destination = $1
+    $dz.determinate("1")
+    $dz.begin("Copying files...")
+
+    Rsync.do_copy($dz, $items, destination, false)
+
+    $dz.finish("Copy Complete")
+    $dz.url("0")
+  else
+    $dz.finish("Error")
+    $dz.url("0")
+  end
+end
