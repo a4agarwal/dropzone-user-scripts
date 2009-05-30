@@ -1,0 +1,39 @@
+#!/usr/bin/ruby
+ 
+# Dropzone Destination Info
+# Name: ImageShack Upload
+# Description: Provides the ability to upload an image to ImageShack.
+# Handles: NSFilenamesPboardType
+# Creator: Paul William
+# URL: http://entropytheblog.com
+# IconURL: http://img521.imageshack.us/img521/8/imageshackx.png
+ 
+require "rexml/document"
+
+FF_USERAGENT = "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.0.6) Gecko/2009011913 Firefox/3.0.6"
+
+def dragged
+  $dz.determinate(false)
+  
+  file_path = $items[0]
+  $dz.begin("Uploading...")
+ 
+  output = IO.popen("/usr/bin/curl -A '#{FF_USERAGENT}' -F 'xml=yes' -F 'fileupload=@#{file_path}'  http://www.imageshack.us/index.php 2>&1").read
+
+  begin
+    doc = REXML::Document.new(output)
+    url = ""
+    doc.elements.each("links/image_link"){|e| url = e.text}
+    $dz.finish("URL is now on clipboard.")
+    $dz.url(url)
+  rescue Exception => e
+    $dz.finish("Error uploading")
+    $dz.url("0")
+  end
+  
+end
+
+def clicked
+  $dz.finish("You clicked me!")
+  $dz.url("0")
+end

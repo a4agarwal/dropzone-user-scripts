@@ -1,0 +1,19 @@
+#!/usr/bin/ruby
+ 
+# Dropzone Destination Info
+# Name: Date & Time
+# Description: Displays the date and time and copies it onto the clipboard.
+# Handles: NSFilenamesPboardType
+# Creator: Paul William
+# URL: http://entropytheblog.com
+# IconURL: http://img12.imageshack.us/img12/7646/clockdz.png
+
+def dragged
+  clicked()
+end
+
+def clicked
+  date = `date`.strip
+  $dz.finish(date)
+  $dz.url(date)
+end

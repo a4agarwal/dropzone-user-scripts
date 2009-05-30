@@ -13,11 +13,11 @@ def dragged
   file_path = $items[0]
   $dz.begin("Doing something with #{file_path}...")
  
-  $dz.percent("20")
+  $dz.percent(20)
   sleep(1)
-  $dz.percent("50")
+  $dz.percent(50)
   sleep(1)
-  $dz.percent("100")
+  $dz.percent(100)
   sleep(1)
  
   $dz.finish("Finished Task")

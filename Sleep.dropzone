@@ -1,0 +1,19 @@
+#!/usr/bin/ruby
+ 
+# Dropzone Destination Info
+# Name: Sleep
+# Description: Puts your Mac to sleep.
+# Handles: NSFilenamesPboardType
+# Creator: Paul William
+# URL: http://entropytheblog.com
+# IconURL: http://img521.imageshack.us/img521/3918/sleepdz.png
+
+def dragged
+  clicked()
+end
+
+def clicked
+  $dz.finish("Sleeping ...")
+  $dz.url("0")
+  `osascript -e 'tell application "System Events" to sleep'`
+end
