@@ -1,0 +1,57 @@
+#!/usr/bin/ruby
+ 
+# Dropzone Destination Info
+# Name: TwitPic
+# Description: Share Photos on Twitter.
+# Handles: NSFilenamesPboardType
+# Creator: Paul William
+# URL: http://entropytheblog.com
+# IconURL: http://img241.imageshack.us/img241/1383/twitpiclogo.png
+ 
+require "rexml/document"
+
+TWITTER_USERNAME = "username"
+TWITTER_PASSWORD = "password"
+
+def dragged
+  $dz.determinate(false)
+  
+  if TWITTER_USERNAME == "username"
+    return_error("You must enter your username and password in the dropzone script!")
+  end
+  
+  file_path = $items[0]
+  
+  $dz.begin("Uploading ...")
+ 
+  output = IO.popen("/usr/bin/curl -F 'username=#{TWITTER_USERNAME}' -F 'password=#{TWITTER_PASSWORD}' -F 'media=@#{file_path}' http://twitpic.com/api/uploadAndPost 2>&1").read
+
+  begin
+    url = ""
+    doc = REXML::Document.new(output)
+    root = doc.root
+    status = root.attributes["status"]
+    
+    if status == "ok"
+      doc.elements.each("rsp/mediaurl"){|e| url = e.text}      
+    else
+      return_error(root.elements[1].attributes["msg"])
+    end
+
+    $dz.finish("URL is now on clipboard.")
+    $dz.url(url)
+  rescue Exception => e
+    return_error("Error uploading!")
+  end
+  
+end
+
+def clicked
+  return_error("You clicked me!")
+end
+
+def return_error(message)
+  $dz.finish(message)
+  $dz.url("0")
+  exit
+end
