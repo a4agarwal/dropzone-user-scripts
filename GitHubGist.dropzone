@@ -1,0 +1,74 @@
+#!/usr/bin/ruby
+ 
+# Dropzone Destination Info
+# Name: GitHub Gist
+# Description: Share file with GitHub Gist pastie service.
+# Handles: NSFilenamesPboardType
+# Creator: Paul William
+# URL: http://entropytheblog.com
+# IconURL: http://img505.imageshack.us/img505/1452/gist.png
+
+# code from http://github.com/defunkt/gist/blob/master/gist.rb 
+require 'open-uri'
+require 'net/http'
+
+# must set to true be private, you cannot delete anonymous gists
+GIST_PRIVATE = true
+
+# These can be found at https://github.com/account
+GITHUB_USERNAME = ""
+GITHUB_API_TOKEN = ""
+ 
+module Gist
+  extend self
+ 
+  @@gist_url = 'http://gist.github.com/%s.txt'
+  
+  def write(content, private_gist)
+    url = URI.parse('http://gist.github.com/gists')
+    req = Net::HTTP.post_form(url, data(nil, nil, content, private_gist))
+    return req['Location']
+  end
+  
+private
+ 
+  def data(name, ext, content, private_gist)
+    return {
+      'file_ext[gistfile1]' => ext,
+      'file_name[gistfile1]' => name,
+      'file_contents[gistfile1]' => content
+    }.merge(private_gist ? { 'private' => 'on' } : {}).merge(auth)
+  end
+ 
+  def auth
+    user = GITHUB_USERNAME
+    token = GITHUB_API_TOKEN
+    user.empty? ? return_error("Cannot find username/password") : { :login => user, :token => token }
+  end
+end
+ 
+def dragged
+  $dz.determinate(false)
+  file_path = $items[0]
+  
+  $dz.begin("Uploading ...")
+
+  begin
+    url = Gist.write(File.open(file_path).read, GIST_PRIVATE)
+    $dz.finish("URL is now on clipboard.")
+    $dz.url(url)
+  rescue Exception => e
+    return_error("Error uploading!")
+  end
+  
+end
+
+def clicked
+  return_error("You clicked me!")
+end
+
+def return_error(message)
+  $dz.finish(message)
+  $dz.url("0")
+  exit
+end
