@@ -51,7 +51,7 @@ def dragged
 		$dz.begin("Filing #{File.basename(file_path)}")
 		$dz.percent(percent)
 		# tags = %x{/usr/local/bin/openmeta -l -p "#{file_path}" | grep tags | awk '{print substr($0, index($0,$2))}'}.split(' ')
-		tags = %x{mdls -name 'kOMUserTags' -raw #{file_path}|awk '/[^()]/ {print $NF}'|tr -d '\n'}.split(',')
+		tags = %x{mdls -name 'kOMUserTags' -raw "#{file_path}"|awk '/[^()]/ {print $NF}'|tr -d '\n'}.split(',')
 		break if tags.empty?
 		filed = false
 		tags.each { |tag|
