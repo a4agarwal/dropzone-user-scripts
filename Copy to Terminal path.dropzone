@@ -32,7 +32,7 @@ END`
     $dz.determinate(true)
     $dz.begin("Copying files...")
 
-    Rsync.do_copy($dz, $items, destination, false)
+    Rsync.do_copy($items, destination, false)
 
     $dz.finish("Copy Complete")
     $dz.url(false)
