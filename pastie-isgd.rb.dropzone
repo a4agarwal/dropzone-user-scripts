@@ -4,9 +4,10 @@
 # Name: Pastie / Is.Gd
 # Description: Sends the dropped text to the Pastie (pastie.org) service and minifies the resulting Pastie URL using Is.Gd.
 # Handles: NSStringPboardType
+# Events: Clicked, Dragged
 # Creator: Paul William
 # URL: http://entropytheblog.com
-# IconURL: http://www.entropytheblog.com/dropzone/pastie-is.gd.png
+# IconURL: http://aptonic.com/destinations/icons/pastie-is.gd.png
 
 def dragged
   $dz.determinate(false)

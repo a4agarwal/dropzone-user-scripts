@@ -2,11 +2,12 @@
  
 # Dropzone Destination Info
 # Name: TwitPic
-# Description: Share Photos on Twitter.
+# Description: Share photos on Twitter via the TwitPic service.
 # Handles: NSFilenamesPboardType
+# Events: Clicked, Dragged
 # Creator: Paul William
 # URL: http://entropytheblog.com
-# IconURL: http://img241.imageshack.us/img241/1383/twitpiclogo.png
+# IconURL: http://aptonic.com/destinations/icons/twitpic.png
  
 require "rexml/document"
 
@@ -17,12 +18,12 @@ def dragged
   $dz.determinate(false)
   
   if TWITTER_USERNAME == "username"
-    return_error("You must enter your username and password in the dropzone script!")
+    $dz.error("TwitPic Upload Error", "You must fill in your username and password in the Dropzone script.")
   end
   
   file_path = $items[0]
   
-  $dz.begin("Uploading ...")
+  $dz.begin("Uploading...")
  
   output = IO.popen("/usr/bin/curl -F 'username=#{TWITTER_USERNAME}' -F 'password=#{TWITTER_PASSWORD}' -F 'media=@#{file_path}' http://twitpic.com/api/uploadAndPost 2>&1").read
 
@@ -35,23 +36,18 @@ def dragged
     if status == "ok"
       doc.elements.each("rsp/mediaurl"){|e| url = e.text}      
     else
-      return_error(root.elements[1].attributes["msg"])
+      $dz.error("TwitPic Upload Error", root.elements[1].attributes["msg"])
     end
 
-    $dz.finish("URL is now on clipboard.")
+    $dz.finish("URL is now on clipboard")
     $dz.url(url)
-  rescue Exception => e
-    return_error("Error uploading!")
+  rescue
+    $dz.finish("Upload Error")
+    $dz.url(false)
   end
   
 end
 
 def clicked
-  return_error("You clicked me!")
-end
-
-def return_error(message)
-  $dz.finish(message)
-  $dz.url("0")
-  exit
+  system("open http://twitpic.com/")
 end

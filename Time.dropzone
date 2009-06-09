@@ -2,15 +2,11 @@
  
 # Dropzone Destination Info
 # Name: Date & Time
-# Description: Displays the date and time and copies it onto the clipboard.
-# Handles: NSFilenamesPboardType
+# Description: Displays the current date and time and copies it to the clipboard.
+# Events: Clicked
 # Creator: Paul William
 # URL: http://entropytheblog.com
-# IconURL: http://img12.imageshack.us/img12/7646/clockdz.png
-
-def dragged
-  clicked()
-end
+# IconURL: http://aptonic.com/destinations/icons/clock.png
 
 def clicked
   date = `date`.strip

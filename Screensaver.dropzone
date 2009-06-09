@@ -2,18 +2,12 @@
  
 # Dropzone Destination Info
 # Name: Screensaver
-# Description: Starts screensaver.
-# Handles: NSFilenamesPboardType
+# Description: Starts the screensaver.
+# Events: Clicked
 # Creator: Florian Poeck
 # URL: http://macfidelity.de
-# IconURL: http://macfidelity.de/sw/dropzone-scripts/dropzone_apple_screensaver.jpg
- 
-def dragged
-  clicked()
-end
+# IconURL: http://aptonic.com/destinations/icons/screensaver.png
  
 def clicked
-  $dz.finish("Screensaver ...")
-  $dz.url("0")
   `osascript -e 'tell application "ScreenSaverEngine" to activate'`
 end

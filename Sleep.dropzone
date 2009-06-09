@@ -3,17 +3,13 @@
 # Dropzone Destination Info
 # Name: Sleep
 # Description: Puts your Mac to sleep.
-# Handles: NSFilenamesPboardType
+# Events: Clicked
 # Creator: Paul William
 # URL: http://entropytheblog.com
-# IconURL: http://img521.imageshack.us/img521/3918/sleepdz.png
-
-def dragged
-  clicked()
-end
+# IconURL: http://aptonic.com/destinations/icons/sleep.png
 
 def clicked
-  $dz.finish("Sleeping ...")
-  $dz.url("0")
+  $dz.finish("Sleeping...")
+  $dz.url(false)
   `osascript -e 'tell application "System Events" to sleep'`
 end

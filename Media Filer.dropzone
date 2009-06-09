@@ -2,13 +2,13 @@
 
 # Dropzone Destination Info
 # Name: Media Filer
-# Description: Moves media files to selected folder and categorizes by type
+# Description: Moves media files to the selected folder and categorizes by type.
 # Handles: NSFilenamesPboardType
+# Events: Dragged
 # Creator: Brett Terpstra
 # URL: http://brettterpstra.com
 # IconURL: http://brettterpstra.com/destinations/icons/MediaFiler.png
 # OptionsNIB: ChooseFolder
-# Events: Dragged
 
 require 'logger'
 

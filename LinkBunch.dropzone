@@ -4,10 +4,11 @@
 # Name: LinkBuncher
 # Description: Scans clipboard or dropped text for links and creates a LinkBunch (http://linkbun.ch)
 # Handles: NSStringPboardType
+# Events: Clicked, Dragged
 # Creator: Brett Terpstra
 # URL: http://brettterpstra.com
 # IconURL: http://brettterpstra.com/destinations/icons/TextCleaner.png
-# Events: Clicked, Dragged
+
 require 'net/http'
 require 'cgi'
 
