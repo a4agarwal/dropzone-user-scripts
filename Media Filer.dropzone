@@ -1,5 +1,3 @@
-#!/usr/bin/ruby
-
 # Dropzone Destination Info
 # Name: Media Filer
 # Description: Moves media files to selected folder and categorizes by type

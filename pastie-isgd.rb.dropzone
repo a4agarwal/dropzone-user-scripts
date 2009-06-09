@@ -1,5 +1,3 @@
-#!/usr/bin/ruby
-
 # Dropzone Destination Info
 # Name: Pastie / Is.Gd
 # Description: Sends the dropped text to the Pastie (pastie.org) service and minifies the resulting Pastie URL using Is.Gd.

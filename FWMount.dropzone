@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 # Dropzone Destination Info
 # Name: FW[Un]Mount
 # Description: Mounts or unmounts all FW drives connected to the system

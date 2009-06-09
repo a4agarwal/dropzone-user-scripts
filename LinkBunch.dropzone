@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 # Dropzone Destination Info
 # Name: LinkBuncher
 # Description: Scans clipboard or dropped text for links and creates a LinkBunch (http://linkbun.ch)

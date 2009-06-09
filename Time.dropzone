@@ -1,5 +1,3 @@
-#!/usr/bin/ruby
- 
 # Dropzone Destination Info
 # Name: Date & Time
 # Description: Displays the date and time and copies it onto the clipboard.

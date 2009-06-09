@@ -1,5 +1,3 @@
-#!/usr/bin/ruby
-
 # Dropzone Destination Info
 # Name: Is.Gd
 # Description: A dropped URL will be converted to an Is.Gd URL.
