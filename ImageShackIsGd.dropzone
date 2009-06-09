@@ -1,3 +1,5 @@
+#!/usr/bin/ruby
+ 
 # Dropzone Destination Info
 # Name: ImageShack / is.gd Upload
 # Description: Provides the ability to upload an image to ImageShack. The URL is then shortened with the is.gd service.

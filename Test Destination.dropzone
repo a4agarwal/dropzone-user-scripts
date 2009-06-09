@@ -1,3 +1,5 @@
+#!/usr/bin/ruby
+ 
 # Dropzone Destination Info
 # Name: Test Destination
 # Description: Provides the ability to do some cool thing.

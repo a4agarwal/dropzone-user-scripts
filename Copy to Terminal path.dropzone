@@ -1,3 +1,5 @@
+#!/usr/bin/ruby
+
 # Dropzone Destination Info
 # Name: Copy to Terminal path
 # Description: Dropped files will be copied to the current Terminal.app path.
