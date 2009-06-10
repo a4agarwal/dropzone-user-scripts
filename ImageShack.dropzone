@@ -1,12 +1,13 @@
 #!/usr/bin/ruby
  
 # Dropzone Destination Info
-# Name: ImageShack Upload
-# Description: Provides the ability to upload an image to ImageShack.
+# Name: ImageShack
+# Description: Uploads an image to ImageShack. Holding down option causes the resulting URL to be minified using the Is.Gd service.
 # Handles: NSFilenamesPboardType
+# Events: Clicked, Dragged
 # Creator: Paul William
 # URL: http://entropytheblog.com
-# IconURL: http://img521.imageshack.us/img521/8/imageshackx.png
+# IconURL: http://aptonic.com/destinations/icons/imageshack.png
  
 require "rexml/document"
 
@@ -21,19 +22,22 @@ def dragged
   output = IO.popen("/usr/bin/curl -A '#{FF_USERAGENT}' -F 'xml=yes' -F 'fileupload=@#{file_path}'  http://www.imageshack.us/index.php 2>&1").read
 
   begin
-    doc = REXML::Document.new(output)
     url = ""
-    doc.elements.each("links/image_link"){|e| url = e.text}
-    $dz.finish("URL is now on clipboard.")
+    doc = REXML::Document.new(output)
+    doc.elements.each("links/image_link") {|e| url = e.text}
+    
+    # TODO: Minify if option key is held down
+    #url = IsGd.minify(url)
+
+    $dz.finish("URL is now on clipboard")
     $dz.url(url)
-  rescue Exception => e
-    $dz.finish("Error uploading")
-    $dz.url("0")
-  end
+  rescue
+    $dz.finish("Upload Failed")
+    $dz.url(false)
+  end  
   
 end
 
 def clicked
-  $dz.finish("You clicked me!")
-  $dz.url("0")
+  system("open http://imageshack.us/")
 end

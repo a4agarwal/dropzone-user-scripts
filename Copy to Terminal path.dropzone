@@ -4,6 +4,7 @@
 # Name: Copy to Terminal path
 # Description: Dropped files will be copied to the current Terminal.app path.
 # Handles: NSFilenamesPboardType
+# Events: Dragged
 # Creator: Aptonic Software
 # URL: http://aptonic.com
 # IconURL: http://aptonic.com/destinations/icons/terminal.png

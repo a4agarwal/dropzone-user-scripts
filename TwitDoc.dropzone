@@ -42,7 +42,7 @@ def dragged
     $dz.finish("URL is now on clipboard")
     $dz.url(url)
   rescue Exception => e
-    $dz.finish("Upload Error")
+    $dz.finish("Upload Failed")
     $dz.url(false)
   end
   
