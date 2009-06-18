@@ -1,33 +1,26 @@
 #!/usr/bin/ruby
  
 # Dropzone Destination Info
-# Name: TwitPic
-# Description: Share photos on Twitter via the TwitPic service.
+# Name: Posterous
+# Description: Share stuff on Posterous.
 # Handles: NSFilenamesPboardType
 # Events: Clicked, Dragged
-# Creator: Paul William
-# URL: http://entropytheblog.com
-# IconURL: http://aptonic.com/destinations/icons/twitpic.png
+# Creator: Aptonic Software
+# URL: http://aptonic.com
+# IconURL: http://aptonic.com/destinations/icons/posterous.png
 # OptionsNIB: Login
-# LoginTitle: Twitter Login Details
+# LoginTitle: Posterous Login Details
  
 require "rexml/document"
 
-TWITTER_USERNAME = "username"
-TWITTER_PASSWORD = "password"
-
 def dragged
   $dz.determinate(false)
-  
-  if TWITTER_USERNAME == "username"
-    $dz.error("TwitPic Upload Error", "You must fill in your username and password in the Dropzone script.")
-  end
   
   file_path = $items[0]
   
   $dz.begin("Uploading...")
  
-  output = IO.popen("/usr/bin/curl -F 'username=#{TWITTER_USERNAME}' -F 'password=#{TWITTER_PASSWORD}' -F 'media=@#{file_path}' http://twitpic.com/api/uploadAndPost 2>&1").read
+  output = IO.popen("/usr/bin/curl -u #{ENV['USERNAME']}:#{ENV['PASSWORD']} -F 'media=@#{file_path}' http://posterous.com/api/newpost 2>&1").read
 
   begin
     url = ""
@@ -51,5 +44,5 @@ def dragged
 end
 
 def clicked
-  system("open http://twitpic.com/")
+  system("open http://posterous.com/")
 end
