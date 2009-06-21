@@ -8,24 +8,19 @@
 # Creator: Paul William
 # URL: http://entropytheblog.com
 # IconURL: http://aptonic.com/destinations/icons/twitdoc.png
+# OptionsNIB: Login
+# LoginTitle: Twitter Login Details
  
 require "rexml/document"
 
-TWITTER_USERNAME = "username"
-TWITTER_PASSWORD = "password"
-
 def dragged
   $dz.determinate(false)
-  
-  if TWITTER_USERNAME == "username"
-    $dz.error("TwitDoc Upload Error", "You must fill in your username and password in the Dropzone script.")
-  end
-  
+
   file_path = $items[0]
   
   $dz.begin("Uploading...")
 
-  output = IO.popen("/usr/bin/curl -F 'username=#{TWITTER_USERNAME}' -F 'password=#{TWITTER_PASSWORD}' -F 'file_1=@#{file_path}' http://twitdoc.com/api/uploadAndTweet 2>&1").read
+  output = IO.popen("/usr/bin/curl -F 'username=#{ENV['USERNAME']}' -F 'password=#{ENV['PASSWORD']}' -F 'file_1=@#{file_path}' http://twitdoc.com/api/uploadAndTweet 2>&1").read
 
   begin
     url = ""
