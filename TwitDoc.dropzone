@@ -2,7 +2,7 @@
  
 # Dropzone Destination Info
 # Name: TwitDoc
-# Description: Share documents on Twitter via the TwitDoc service.
+# Description: Share documents on Twitter via the TwitDoc service. Holding down option allows you to enter a tweet to send now.
 # Handles: NSFilenamesPboardType
 # Events: Clicked, Dragged
 # KeyModifiers: Option
