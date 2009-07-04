@@ -11,7 +11,7 @@ require "base64"
 # KeyModifiers: Command
 # Creator: Studio Melipone SARL
 # URL: http://upshotapp.com
-# IconURL: http://upshotapp.com/small_logo.png
+# IconURL: http://aptonic.com/destinations/icons/upshot.png
 # OptionsNIB: Login
 
 def dragged
